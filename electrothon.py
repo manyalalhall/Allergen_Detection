@@ -8,7 +8,9 @@ import re
 import numpy as np
 from PIL import Image
 import easyocr
+import os 
 
+pytesseract.pytesseract.tesseract_cmd = os.path.join(os.getcwd(), "tesseract", "tesseract")
 app = FastAPI()
 @app.get("/")
 def read_root():
