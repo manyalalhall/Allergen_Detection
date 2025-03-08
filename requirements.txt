@@ -9,4 +9,5 @@ textblob==0.17.1
 easyocr==1.7.0
 torch==2.0.0
 torchvision==0.15.1
+python-multipart
 
