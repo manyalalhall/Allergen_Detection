@@ -1,18 +1,25 @@
-# Use an official Python runtime as base image
-FROM python:3.10
+FROM python:3.11
 
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    tesseract-ocr \
+    libtesseract-dev && \
+    rm -rf /var/lib/apt/lists/*
+
+# Set working directory
 WORKDIR /app
 
-# Copy files
-COPY . /app
-
-# Install dependencies
+# Copy requirements and install
+COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Expose the port FastAPI runs on
+# Copy the project files
+COPY . .
+
+# Expose the port
 EXPOSE 8000
 
-# Run the API
+# Run FastAPI with Uvicorn
 CMD ["uvicorn", "electrothon:app", "--host", "0.0.0.0", "--port", "8000"]
 
 
